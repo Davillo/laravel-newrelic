@@ -40,7 +40,7 @@ class NewRelicMiddleware
         // We must let the response get handled before naming the transaction, otherwise the necessary route i
         // information won't be available in the request object.
         $response = $next($request);
-        
+
         $this->newRelic->nameTransaction($this->getTransactionName($request));
 
         return $response;
@@ -57,19 +57,9 @@ class NewRelicMiddleware
      */
     public function getTransactionName(Request $request)
     {
-        $route = $request->route();
-
-        if (is_array($route)) {
-            // Try the assigned controller action
-            if (isset($route[1]) && isset($route[1]['uses'])) {
-                return $route[1]['uses'];
-            } // Try named routes
-            elseif (isset($route[1]) && isset($route[1]['as'])) {
-                return $route[1]['as'];
-            }
-        }
-
-        return 'index.php';
+        $urlPath = $request->url();
+        
+        return $urlPath;
     }
 
 }

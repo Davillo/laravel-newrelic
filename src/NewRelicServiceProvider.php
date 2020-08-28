@@ -2,8 +2,8 @@
 
 namespace Davillo\NewRelic;
 
-use Illuminate\Support\ServiceProvider;
 use Intouch\Newrelic\Newrelic;
+use Illuminate\Support\ServiceProvider;
 
 /**
  * Class NewRelicServiceProvider
@@ -11,14 +11,16 @@ use Intouch\Newrelic\Newrelic;
  */
 class NewRelicServiceProvider extends ServiceProvider
 {
-    
+
     /**
      * Registers the service provider
      */
     public function register()
     {
         $this->app->singleton(Newrelic::class, function() {
-            return new Newrelic();
+            $newRelic = new Newrelic();
+            $newRelic->setAppName(env('NEWRELIC_APP_NAME'), env('NEWRELIC_APP_LICENSE'));
+            return $newRelic;
         });
     }
 
