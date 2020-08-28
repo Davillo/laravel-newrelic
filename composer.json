@@ -1,0 +1,22 @@
+{
+  "name": "davillo/laravel-newrelic",
+  "description": "New Relic library for the laravel/lumen frameworks",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Davillo Aurélio",
+      "email": "davillo.dev@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.2.5",
+    "intouch/newrelic": "^1.0",
+    "illuminate/support": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Davillo\\NewRelic\\": "src/"
+    }
+  }
+}
