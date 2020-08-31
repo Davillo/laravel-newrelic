@@ -57,9 +57,19 @@ class NewRelicMiddleware
      */
     public function getTransactionName(Request $request)
     {
-        $urlPath = $request->url();
+        $route = $request->route();
+
+        if (is_array($route)) {
+            // Try the assigned controller action
+            if (isset($route[1]) && isset($route[1]['uses'])) {
+                return $route[1]['uses'];
+            } // Try named routes
+            elseif (isset($route[1]) && isset($route[1]['as'])) {
+                return $route[1]['as'];
+            }
+        }
         
-        return $urlPath;
+        return 'index.php';
     }
 
 }
